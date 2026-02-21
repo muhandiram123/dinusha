@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>D.M.S | Portfolio</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- ===== LOADING SCREEN ===== -->
+<div id="loader">
+  <div class="loader-content">
+    <div class="loader-logo">D.M.S</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <p class="loader-text">Loading Portfolio...</p>
+  </div>
+</div>
+
+<!-- ===== PASSWORD MODAL ===== -->
+<div id="pwModal" class="modal-overlay hidden">
+  <div class="modal-box glass">
+    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    <div class="modal-icon"><i class="fas fa-lock"></i></div>
+    <h2>Edit Mode</h2>
+    <p>Enter the password to unlock editing</p>
+    <input type="password" id="pwInput" placeholder="Enter password..." class="pw-input"/>
+    <button onclick="checkPassword()" class="btn-primary">Unlock <i class="fas fa-unlock"></i></button>
+    <p id="pwError" class="pw-error hidden">❌ Wrong password! Try again.</p>
+  </div>
+</div>
+
+<!-- ===== EDIT PANEL ===== -->
+<div id="editPanel" class="edit-panel hidden">
+  <div class="edit-header">
+    <span><i class="fas fa-edit"></i> Edit Mode Active</span>
+    <button onclick="saveChanges()" class="btn-save"><i class="fas fa-save"></i> Save</button>
+    <button onclick="lockEdit()" class="btn-lock"><i class="fas fa-lock"></i> Lock</button>
+  </div>
+  <div class="edit-fields" id="editFields"></div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="nav-brand">
+    <span class="brand-text">D<span class="accent">.</span>M<span class="accent">.</span>S</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="nav-link active">Home</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#skills" class="nav-link">Skills</a></li>
+    <li><a href="#education" class="nav-link">Education</a></li>
+    <li><a href="#projects" class="nav-link">Projects</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="edit-btn" onclick="openModal()" title="Edit Site">
+      <i class="fas fa-pen"></i>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== PARTICLES ===== -->
+<div id="particles"></div>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="home" class="hero-section">
+  <div class="hero-glow glow-1"></div>
+  <div class="hero-glow glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-left" data-aos="fade-right">
+      <p class="hero-greeting">👋 Hello, I'm</p>
+      <h1 class="hero-name" data-editable="name">P.G Dinusha Madhushan Somarathna</h1>
+      <div class="typewriter-wrapper">
+        <span class="typewriter-prefix">I'm a </span>
+        <span class="typewriter" id="typewriter"></span>
+      </div>
+      <p class="hero-bio" data-editable="bio">Passionate student at University of Sri Jayewardenepura, driven by technology and creativity. Building innovative solutions one line of code at a time. 🚀</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary"><i class="fas fa-envelope"></i> Contact Me</a>
+        <a href="#projects" class="btn-outline"><i class="fas fa-briefcase"></i> My Work</a>
+      </div>
+      <div class="social-links">
+        <a href="mailto:dinushamadhushan017@gmail.com" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:0782363699" class="social-icon" title="Call"><i class="fas fa-phone"></i></a>
+        <a href="#" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+    <div class="hero-right" data-aos="fade-left">
+      <div class="photo-frame">
+        <div class="photo-ring ring-1"></div>
+        <div class="photo-ring ring-2"></div>
+        <div class="photo-ring ring-3"></div>
+        <img src="photo.jpg" alt="D.M.S" class="hero-photo" id="heroPhoto"/>
+        <div class="photo-badge"><span>🎓 USJ</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-dot"></div>
+    <span>Scroll Down</span>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-card glass" data-aos="fade-up" data-delay="0">
+      <div class="stat-icon"><i class="fas fa-code"></i></div>
+      <div class="stat-num" data-count="5">0</div>
+      <div class="stat-label">Projects Done</div>
+    </div>
+    <div class="stat-card glass" data-aos="fade-up" data-delay="100">
+      <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+      <div class="stat-num" data-count="3">0</div>
+      <div class="stat-label">Years Study</div>
+    </div>
+    <div class="stat-card glass" data-aos="fade-up" data-delay="200">
+      <div class="stat-icon"><i class="fas fa-star"></i></div>
+      <div class="stat-num" data-count="10">0</div>
+      <div class="stat-label">Skills</div>
+    </div>
+    <div class="stat-card glass" data-aos="fade-up" data-delay="300">
+      <div class="stat-icon"><i class="fas fa-heart"></i></div>
+      <div class="stat-num" data-count="100">0</div>
+      <div class="stat-label">% Passion</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT SECTION ===== -->
+<section id="about" class="section">
+  <div class="section-header" data-aos="fade-up">
+    <span class="section-tag">Get to know me</span>
+    <h2 class="section-title">About <span class="accent">Me</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-left" data-aos="fade-right">
+      <div class="about-img-wrapper">
+        <img src="photo.jpg" alt="Dinusha" class="about-photo"/>
+        <div class="about-badge glass">
+          <i class="fas fa-university"></i>
+          <span>USJ Student</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-right" data-aos="fade-left">
+      <h3 class="about-subtitle">Who Am I?</h3>
+      <p class="about-text" data-editable="about">I'm <strong>P.G Dinusha Madhushan Somarathna</strong>, a passionate and dedicated student at the University of Sri Jayewardenepura. I love exploring technology, building creative projects, and constantly learning new things. My goal is to contribute meaningfully to the world through innovation and hard work.</p>
+      <div class="info-cards">
+        <div class="info-card glass">
+          <i class="fas fa-user accent"></i>
+          <div>
+            <span class="info-label">Full Name</span>
+            <span class="info-value" data-editable="fullname">P.G Dinusha Madhushan Somarathna</span>
+          </div>
+        </div>
+        <div class="info-card glass">
+          <i class="fas fa-phone accent"></i>
+          <div>
+            <span class="info-label">Phone</span>
+            <span class="info-value" data-editable="phone">0782363699</span>
+          </div>
+        </div>
+        <div class="info-card glass">
+          <i class="fas fa-envelope accent"></i>
+          <div>
+            <span class="info-label">Email</span>
+            <span class="info-value" data-editable="email">dinushamadhushan017@gmail.com</span>
+          </div>
+        </div>
+        <div class="info-card glass">
+          <i class="fas fa-university accent"></i>
+          <div>
+            <span class="info-label">University</span>
+            <span class="info-value" data-editable="university">University of Sri Jayewardenepura</span>
+          </div>
+        </div>
+        <div class="info-card glass">
+          <i class="fas fa-map-marker-alt accent"></i>
+          <div>
+            <span class="info-label">Location</span>
+            <span class="info-value" data-editable="location">Sri Lanka 🇱🇰</span>
+          </div>
+        </div>
+        <div class="info-card glass">
+          <i class="fas fa-briefcase accent"></i>
+          <div>
+            <span class="info-label">Status</span>
+            <span class="info-value" data-editable="status">Open to Opportunities</span>
+          </div>
+        </div>
+      </div>
+      <a href="#contact" class="btn-primary mt-2"><i class="fas fa-paper-plane"></i> Hire Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS SECTION ===== -->
+<section id="skills" class="section dark-bg">
+  <div class="section-header" data-aos="fade-up">
+    <span class="section-tag">What I know</span>
+    <h2 class="section-title">My <span class="accent">Skills</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-container">
+    <div class="skills-grid" data-aos="fade-up">
+      <div class="skill-bubble" data-skill="HTML5" style="--clr:#e34c26">
+        <i class="fab fa-html5"></i><span>HTML5</span>
+      </div>
+      <div class="skill-bubble" data-skill="CSS3" style="--clr:#264de4">
+        <i class="fab fa-css3-alt"></i><span>CSS3</span>
+      </div>
+      <div class="skill-bubble" data-skill="JavaScript" style="--clr:#f7df1e">
+        <i class="fab fa-js-square"></i><span>JavaScript</span>
+      </div>
+      <div class="skill-bubble" data-skill="Python" style="--clr:#3776AB">
+        <i class="fab fa-python"></i><span>Python</span>
+      </div>
+      <div class="skill-bubble" data-skill="Java" style="--clr:#f89820">
+        <i class="fab fa-java"></i><span>Java</span>
+      </div>
+      <div class="skill-bubble" data-skill="React" style="--clr:#61dafb">
+        <i class="fab fa-react"></i><span>React</span>
+      </div>
+      <div class="skill-bubble" data-skill="Git" style="--clr:#f05032">
+        <i class="fab fa-git-alt"></i><span>Git</span>
+      </div>
+      <div class="skill-bubble" data-skill="Database" style="--clr:#00758f">
+        <i class="fas fa-database"></i><span>Database</span>
+      </div>
+      <div class="skill-bubble" data-skill="Linux" style="--clr:#fcc624">
+        <i class="fab fa-linux"></i><span>Linux</span>
+      </div>
+      <div class="skill-bubble" data-skill="UI/UX" style="--clr:#ff7eb3">
+        <i class="fas fa-palette"></i><span>UI/UX</span>
+      </div>
+    </div>
+    <div class="skill-bars" data-aos="fade-up">
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>HTML & CSS</span><span>90%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="90" style="--clr:#e34c26"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>JavaScript</span><span>78%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="78" style="--clr:#f7df1e"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>Python</span><span>72%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="72" style="--clr:#3776AB"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>Java</span><span>65%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="65" style="--clr:#f89820"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-header"><span>React</span><span>60%</span></div>
+        <div class="bar-track"><div class="bar-fill" data-width="60" style="--clr:#61dafb"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION SECTION ===== -->
+<section id="education" class="section">
+  <div class="section-header" data-aos="fade-up">
+    <span class="section-tag">My journey</span>
+    <h2 class="section-title">Edu<span class="accent">cation</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card glass">
+        <div class="timeline-icon"><i class="fas fa-university"></i></div>
+        <div class="timeline-tag current">Current</div>
+        <h3 data-editable="edu1_title">University of Sri Jayewardenepura</h3>
+        <p class="timeline-sub" data-editable="edu1_sub">Undergraduate Student</p>
+        <p class="timeline-period"><i class="fas fa-calendar"></i> <span data-editable="edu1_period">2022 - Present</span></p>
+        <p data-editable="edu1_desc">Pursuing undergraduate studies at one of Sri Lanka's most prestigious universities, gaining knowledge in technology, innovation and leadership.</p>
+      </div>
+    </div>
+    <div class="timeline-item right" data-aos="fade-left">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card glass">
+        <div class="timeline-icon"><i class="fas fa-school"></i></div>
+        <h3 data-editable="edu2_title">Advanced Level Education</h3>
+        <p class="timeline-sub" data-editable="edu2_sub">Physical Science Stream</p>
+        <p class="timeline-period"><i class="fas fa-calendar"></i> <span data-editable="edu2_period">2019 - 2022</span></p>
+        <p data-editable="edu2_desc">Completed A/L examinations with focus on physical science subjects, demonstrating strong analytical and problem-solving abilities.</p>
+      </div>
+    </div>
+    <div class="timeline-item" data-aos="fade-right">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card glass">
+        <div class="timeline-icon"><i class="fas fa-book"></i></div>
+        <h3 data-editable="edu3_title">Ordinary Level Education</h3>
+        <p class="timeline-sub" data-editable="edu3_sub">Secondary School</p>
+        <p class="timeline-period"><i class="fas fa-calendar"></i> <span data-editable="edu3_period">2014 - 2019</span></p>
+        <p data-editable="edu3_desc">Completed O/L examinations with excellent results, building a strong foundation across multiple disciplines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS SECTION ===== -->
+<section id="projects" class="section dark-bg">
+  <div class="section-header" data-aos="fade-up">
+    <span class="section-tag">What I've built</span>
+    <h2 class="section-title">My <span class="accent">Projects</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card glass" data-aos="fade-up" data-delay="0">
+      <div class="project-img" style="background: linear-gradient(135deg,#667eea,#764ba2)">
+        <i class="fas fa-laptop-code project-icon"></i>
+      </div>
+      <div class="project-body">
+        <span class="project-tag">Web Development</span>
+        <h3 data-editable="proj1_title">Portfolio Website</h3>
+        <p data-editable="proj1_desc">A fully animated, responsive personal portfolio built with pure HTML, CSS and JavaScript featuring dark mode glassmorphism design.</p>
+        <div class="project-techs">
+          <span class="tech-badge">HTML</span><span class="tech-badge">CSS</span><span class="tech-badge">JS</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="btn-sm"><i class="fas fa-eye"></i> View</a>
+          <a href="#" class="btn-sm outline"><i class="fab fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card glass" data-aos="fade-up" data-delay="100">
+      <div class="project-img" style="background: linear-gradient(135deg,#f093fb,#f5576c)">
+        <i class="fas fa-mobile-alt project-icon"></i>
+      </div>
+      <div class="project-body">
+        <span class="project-tag">App Development</span>
+        <h3 data-editable="proj2_title">Student Management App</h3>
+        <p data-editable="proj2_desc">A comprehensive student management system built for university use, featuring attendance tracking and grade management.</p>
+        <div class="project-techs">
+          <span class="tech-badge">Java</span><span class="tech-badge">MySQL</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="btn-sm"><i class="fas fa-eye"></i> View</a>
+          <a href="#" class="btn-sm outline"><i class="fab fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+    <div class="project-card glass" data-aos="fade-up" data-delay="200">
+      <div class="project-img" style="background: linear-gradient(135deg,#4facfe,#00f2fe)">
+        <i class="fas fa-robot project-icon"></i>
+      </div>
+      <div class="project-body">
+        <span class="project-tag">AI / Python</span>
+        <h3 data-editable="proj3_title">Data Analysis Tool</h3>
+        <p data-editable="proj3_desc">Python-based data analysis and visualization tool using pandas and matplotlib for academic research purposes.</p>
+        <div class="project-techs">
+          <span class="tech-badge">Python</span><span class="tech-badge">Pandas</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="btn-sm"><i class="fas fa-eye"></i> View</a>
+          <a href="#" class="btn-sm outline"><i class="fab fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact" class="section">
+  <div class="section-header" data-aos="fade-up">
+    <span class="section-tag">Get in touch</span>
+    <h2 class="section-title">Contact <span class="accent">Me</span></h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-left" data-aos="fade-right">
+      <h3>Let's Talk! 💬</h3>
+      <p data-editable="contact_text">Have a project idea, want to collaborate, or just want to say hi? Feel free to reach out. I'm always open to new opportunities and connections!</p>
+      <div class="contact-cards">
+        <div class="contact-card glass" onclick="copyToClipboard('0782363699','Phone')">
+          <i class="fas fa-phone accent"></i>
+          <div>
+            <span class="cc-label">Phone</span>
+            <span class="cc-value" data-editable="contact_phone">0782363699</span>
+          </div>
+          <span class="copy-hint"><i class="fas fa-copy"></i></span>
+        </div>
+        <div class="contact-card glass" onclick="copyToClipboard('dinushamadhushan017@gmail.com','Email')">
+          <i class="fas fa-envelope accent"></i>
+          <div>
+            <span class="cc-label">Email</span>
+            <span class="cc-value" data-editable="contact_email">dinushamadhushan017@gmail.com</span>
+          </div>
+          <span class="copy-hint"><i class="fas fa-copy"></i></span>
+        </div>
+        <div class="contact-card glass">
+          <i class="fas fa-map-marker-alt accent"></i>
+          <div>
+            <span class="cc-label">Location</span>
+            <span class="cc-value" data-editable="contact_location">Sri Jayewardenepura, Sri Lanka</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right" data-aos="fade-left">
+      <form class="contact-form glass" onsubmit="sendMessage(event)">
+        <h3>Send a Message</h3>
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="John Doe" required />
+        </div>
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" placeholder="john@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="What's it about?" required />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="4" placeholder="Your message here..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full"><i class="fas fa-paper-plane"></i> Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">D<span class="accent">.</span>M<span class="accent">.</span>S</div>
+    <p class="footer-tagline" data-editable="footer_text">Crafted with ❤️ by Dinusha Madhushan Somarathna</p>
+    <div class="footer-social">
+      <a href="mailto:dinushamadhushan017@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+      <a href="tel:0782363699" class="social-icon"><i class="fas fa-phone"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p class="footer-copy">© 2026 P.G Dinusha Madhushan Somarathna. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" class="toast hidden"></div>
+
+<!-- ===== BACK TO TOP ===== -->
+<button id="backTop" onclick="scrollToTop()" class="back-top hidden"><i class="fas fa-chevron-up"></i></button>
+
+<!-- ===== CURSOR ===== -->
+<div id="cursor"></div>
+<div id="cursorTrail"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
